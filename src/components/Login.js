@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   // let host=process.env.REACT_APP_HOST || "http://localhost:4000";
   let host=process.env.NODE_ENV === 'production' ? 'https://inote-book1.herokuapp.com' : 'http://localhost:4000';
-  
+  console.log(host);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
