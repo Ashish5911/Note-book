@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 const Signup = () => {
     const [credentials, setCredentials] = useState({name:"",email: "", password: ""}) 
      let navigate = useNavigate();
-     let host=process.env.REACT_APP_PORT
+     let host=process.env.REACT_APP_HOST || "http://localhost:4000"
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(`${host}/api/auth/createuser`, {

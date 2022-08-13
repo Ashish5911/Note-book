@@ -5,7 +5,7 @@ import { useState } from "react";
 const NoteState = (props) => {
   // const host = process.env.REACT_APP_HOST || "http://localhost:4000"
   // let port=process.env.REACT_APP_PORT
-  let host=process.env.REACT_APP_PORT
+  let host=process.env.REACT_APP_HOST || "http://localhost:4000"
 
   const notesInitial = []
   const [notes, setNotes] = useState(notesInitial)
