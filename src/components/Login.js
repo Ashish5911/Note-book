@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = (props) => {
-  let host=process.env.REACT_APP_HOST
+  let host=process.env.REACT_APP_PORT
   
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
