@@ -1,8 +1,9 @@
 import NoteContext from "./noteContext";
 import { useState } from "react";
 
+
 const NoteState = (props) => {
-  const host = "http://localhost:4000"
+  const host = process.env.REACT_APP_HOST || "http://localhost:4000"
   const notesInitial = []
   const [notes, setNotes] = useState(notesInitial)
 
@@ -49,6 +50,7 @@ const NoteState = (props) => {
       // body: JSON.stringify({title, description, tag})
     });
     const json = response.json(); 
+    console.log(json);
     const newNotes = notes.filter((note) => { return note._id !== id })
     setNotes(newNotes)
     // console.log(typeof localStorage.getItem('token'));
@@ -66,7 +68,7 @@ const NoteState = (props) => {
       body: JSON.stringify({title, description, tag})
     });
     const json = await response.json(); 
-
+    console.log(json);
      let newNotes = JSON.parse(JSON.stringify(notes))
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {

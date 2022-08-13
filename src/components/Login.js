@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = (props) => {
-  
+  let port=process.env.REACT_APP_PORT
   
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/api/auth/login", {
+    const response = await fetch(`http://localhost:${port}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,11 +44,13 @@ const Login = (props) => {
     <>
       
       <div className="container">
-        <form onSubmit={handleSubmit}>
+      <span className="far fa-user btn btn-success btn-lg" aria-hidden="true"></span>
+        <form onSubmit={handleSubmit} className="col-md-6">
           <div className="mb-3">
+          
             <label htmlFor="email" className="form-label">
               Email address
-            </label>
+            </label><br/>
             <input
               type="email"
               className="form-control"
@@ -80,6 +82,7 @@ const Login = (props) => {
             Submit
           </button>
         </form>
+      <span className="glyphicon glyphicon-user"></span>
       </div>
     </>
   );

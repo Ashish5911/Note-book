@@ -1,11 +1,14 @@
 
-const connectTomongoose = require('./db');
+// import * as dotenv from 'dotenv'
+// dotenv.config()
+require('dotenv').config()
 const express = require('express');
+const connectTomongoose = require('./db');
 var cors = require('cors') 
 
 connectTomongoose();
 const app = express()
-const port = 4000
+const port = process.env.PORT_1 || 4000
 
 app.use(cors())
 app.use(express.json())
