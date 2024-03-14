@@ -45,22 +45,33 @@ const NoteState = (props) => {
 
   // Delete a Note
   const deleteNote = async (id) => {
-    // API Call
-    const response = await fetch(`${host}api/notes/deletenote/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token':localStorage.getItem('token')
-      },
-      // body: JSON.stringify({title, description, tag})
-    });
-    const json = response.json(); 
-    console.log(json);
-    const newNotes = notes.filter((note) => { return note._id !== id })
-    setNotes(newNotes)
-    // console.log(typeof localStorage.getItem('token'));
-  }
-
+    try {
+      // API Call
+      const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('token')
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete note');
+      }
+  
+      // Parse response body as JSON
+      const json = await response.json();
+      console.log(json);
+  
+      // Filter out the deleted note from the notes array
+      const newNotes = notes.filter((note) => note._id !== id);
+      setNotes(newNotes);
+    } catch (error) {
+      console.error('Error deleting note:', error);
+      // Handle error appropriately (e.g., show an error message to the user)
+    }
+  };
+  
   // Edit a Note
   const editNote = async (id, title, description, tag) => {
     // API Call 
